@@ -5,69 +5,113 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Andy Torres - Developer Portfolio</title>
     <style>
+        /* Global Styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f1f1f1;
+            background-color: #f9f9f9;
             color: #333;
+            transition: all 0.3s ease;
+        }
+        h1, h2 {
+            color: #0044cc;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
         }
         header {
             background-color: #0044cc;
             color: white;
-            padding: 20px;
             text-align: center;
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
         section {
-            padding: 20px;
+            padding: 40px;
+            margin: 20px auto;
+            max-width: 1100px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
-        h2 {
-            color: #0044cc;
-        }
-        .skill-list, .blog-list {
-            list-style-type: none;
-            padding: 0;
-        }
-        .skill-list li, .blog-list li {
-            padding: 10px 0;
-            font-size: 18px;
-        }
+
+        /* Button Styles */
         .button {
             background-color: #0044cc;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 25px;
             border: none;
+            border-radius: 6px;
             cursor: pointer;
-            margin: 5px;
             font-size: 16px;
+            transition: background-color 0.3s ease;
+            margin: 10px;
         }
         .button:hover {
             background-color: #0033aa;
         }
-        #offlinePage {
-            display: none;
-            background-color: #333;
-            color: white;
-            padding: 100px 20px;
-            text-align: center;
-        }
+
+        /* Mod Menu */
         #modMenu {
             display: none;
             position: fixed;
             top: 20%;
             left: 50%;
             transform: translateX(-50%);
-            background-color: white;
-            padding: 20px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+            transition: opacity 0.3s ease;
         }
         #modMenu button {
             display: block;
+            width: 100%;
             margin: 10px auto;
+        }
+        #modMenu .close-btn {
+            background-color: #ff4444;
+            margin-top: 10px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        /* Offline Page */
+        #offlinePage {
+            display: none;
+            background-color: #333;
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            font-size: 24px;
+            z-index: 9999;
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            section {
+                padding: 20px;
+                margin: 10px;
+            }
         }
     </style>
 </head>
 <body>
+
     <header>
         <h1>Andy Torres - Advanced Developer</h1>
         <p>Specializing in HTML, CSS, JavaScript, Node.js, and Python</p>
@@ -75,7 +119,7 @@
 
     <section>
         <h2>Skills</h2>
-        <ul class="skill-list">
+        <ul class="fade-in">
             <li>HTML</li>
             <li>CSS</li>
             <li>JavaScript</li>
@@ -86,7 +130,7 @@
 
     <section>
         <h2>Blog</h2>
-        <ul class="blog-list">
+        <ul class="fade-in">
             <li><a href="#">How to Build a Full-Stack Web Application</a></li>
             <li><a href="#">Mastering JavaScript: Tips and Tricks</a></li>
             <li><a href="#">Using Node.js for Backend Development</a></li>
@@ -102,9 +146,11 @@
         <h2>You are currently offline. Please check your connection.</h2>
     </div>
 
+    <!-- Mod Menu -->
     <div id="modMenu">
         <button class="button" id="downloadWebsite">Download Website</button>
         <button class="button" id="bypassOffline">Bypass Offline</button>
+        <button class="button close-btn" id="closeModMenu">Close</button>
     </div>
 
     <script>
@@ -118,7 +164,13 @@
             if (event.ctrlKey && event.altKey && event.shiftKey && event.key === 'D') {
                 event.preventDefault();
                 document.getElementById('modMenu').style.display = 'block';
+                document.getElementById('modMenu').classList.add('fade-in');
             }
+        });
+
+        // Close Mod Menu
+        document.getElementById('closeModMenu').addEventListener('click', function() {
+            document.getElementById('modMenu').style.display = 'none';
         });
 
         // Button to trigger downloading the website files
