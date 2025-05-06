@@ -35,12 +35,20 @@
         <button onclick="appendValue('%')">%</button>
       </div>
     </div>
+
     <div class="sidebar">
       <h2>AI Sidebar</h2>
       <p><strong>Operations Done:</strong> <span id="opsCount">0</span></p>
       <p><strong>Average Result:</strong> <span id="avgResult">0</span></p>
+      <p><strong>Max Result:</strong> <span id="maxResult">0</span></p>
+      <p><strong>Min Result:</strong> <span id="minResult">0</span></p>
+      <p><strong>Last Result:</strong> <span id="lastResult">0</span></p>
+      <hr />
+      <h3>Recent Results</h3>
+      <ul id="history" style="list-style:none; padding: 0;"></ul>
     </div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
