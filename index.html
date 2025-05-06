@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Defenda Minecraft</title>
-  <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
   <style>
     body {
       margin: 0;
@@ -101,9 +100,7 @@
     <nav>
       <ul>
         <li><a href="index.html">Home</a></li>
-        <li><a href="#help">Help</a></li>
-        <li><a href="#signup">Signup</a></li>
-        <li><a href="#login">Login</a></li>
+        <li><a href="#help">How to Join</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
@@ -119,43 +116,43 @@
     <h2>Why Join Us?</h2>
     <div class="feature-grid">
       <div class="feature">
+        <h3>🌐 24/7 Online</h3>
+        <p>Our servers never sleep — play any time, day or night.</p>
+      </div>
+      <div class="feature">
         <h3>🔥 Custom Plugins</h3>
-        <p>We run our own custom-coded features to keep gameplay exciting.</p>
+        <p>Unique gameplay with custom-coded features and enhancements.</p>
       </div>
       <div class="feature">
         <h3>🛡 Active Moderation</h3>
-        <p>Community safety is a top priority with real moderation.</p>
+        <p>We keep the community fun and safe with real human moderators.</p>
       </div>
       <div class="feature">
-        <h3>🎮 Cross-Platform</h3>
-        <p>Supports both Java and Bedrock users!</p>
+        <h3>🎮 Java & Bedrock Support</h3>
+        <p>All players are welcome! Connect from PC, mobile, or console.</p>
+      </div>
+      <div class="feature">
+        <h3>🚀 Fast & Lag-Free</h3>
+        <p>Optimized for high performance and smooth gameplay.</p>
       </div>
     </div>
   </section>
 
   <section id="help" class="features">
-    <h2>How to Join</h2>
-    <p>Simply launch Minecraft and enter <strong>play.defendaminecraft.online</strong> in the Multiplayer section.</p>
-  </section>
-
-  <section id="signup" class="features">
-    <h2>Create Your Account</h2>
-    <form id="signupForm">
-      <input type="email" name="email" placeholder="Email" required />
-      <input type="password" name="password" placeholder="Password" required />
-      <div class="h-captcha" data-sitekey="162a04ac-5e36-478e-a9f6-867c19fe7614"></div>
-      <button type="submit">Signup</button>
-    </form>
-  </section>
-
-  <section id="login" class="features">
-    <h2>Login to Your Account</h2>
-    <form id="loginForm">
-      <input type="email" name="email" placeholder="Email" required />
-      <input type="password" name="password" placeholder="Password" required />
-      <div class="h-captcha" data-sitekey="162a04ac-5e36-478e-a9f6-867c19fe7614"></div>
-      <button type="submit">Login</button>
-    </form>
+    <h2>How to Join Defenda Minecraft</h2>
+    <div class="feature-grid">
+      <div class="feature">
+        <h3>Java Edition</h3>
+        <p>Open Minecraft Java Edition, go to Multiplayer, click Add Server, and enter:</p>
+        <strong>play.defendaminecraft.online</strong>
+      </div>
+      <div class="feature">
+        <h3>Bedrock Edition</h3>
+        <p>Go to Servers → Add Server and use:</p>
+        <strong>Server Address:</strong> play.defendaminecraft.online<br/>
+        <strong>Port:</strong> 19132
+      </div>
+    </div>
   </section>
 
   <section id="contact" class="features">
@@ -173,75 +170,8 @@
   </footer>
 
   <script>
-    const usersDB = JSON.parse(localStorage.getItem("usersDB") || "[]");
-
-    function saveUsers() {
-      localStorage.setItem("usersDB", JSON.stringify(usersDB));
-    }
-
-    function signup(email, password) {
-      const exists = usersDB.find((u) => u.email === email);
-      if (exists) return { success: false, message: "User already exists" };
-      usersDB.push({ email, password });
-      saveUsers();
-      return { success: true };
-    }
-
-    function login(email, password) {
-      const user = usersDB.find((u) => u.email === email && u.password === password);
-      if (user) {
-        sessionStorage.setItem("currentUser", email);
-        return { success: true };
-      }
-      return { success: false, message: "Invalid credentials" };
-    }
-
     document.addEventListener("DOMContentLoaded", () => {
-      const signupForm = document.getElementById("signupForm");
-      const loginForm = document.getElementById("loginForm");
       const contactForm = document.getElementById("contactForm");
-
-      if (signupForm) {
-        signupForm.addEventListener("submit", (e) => {
-          e.preventDefault();
-          const email = signupForm.email.value;
-          const password = signupForm.password.value;
-          const captchaResponse = hcaptcha.getResponse();
-
-          if (!captchaResponse) {
-            alert("Please complete the CAPTCHA.");
-            return;
-          }
-
-          const result = signup(email, password);
-          alert(result.success ? "Signup successful!" : result.message);
-          if (result.success) {
-            hcaptcha.reset();
-            window.location.href = "#login";
-          }
-        });
-      }
-
-      if (loginForm) {
-        loginForm.addEventListener("submit", (e) => {
-          e.preventDefault();
-          const email = loginForm.email.value;
-          const password = loginForm.password.value;
-          const captchaResponse = hcaptcha.getResponse();
-
-          if (!captchaResponse) {
-            alert("Please complete the CAPTCHA.");
-            return;
-          }
-
-          const result = login(email, password);
-          alert(result.success ? "Login successful!" : result.message);
-          if (result.success) {
-            hcaptcha.reset();
-            window.location.href = "#";
-          }
-        });
-      }
 
       if (contactForm) {
         contactForm.addEventListener("submit", function (e) {
