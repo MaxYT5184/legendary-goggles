@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Defenda Minecraft</title>
-  <script src="https://www.hcaptcha.com/1/api.js" async defer></script>
+  <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
   <style>
     body {
       margin: 0;
@@ -143,7 +143,7 @@
     <form id="signupForm">
       <input type="email" name="email" placeholder="Email" required />
       <input type="password" name="password" placeholder="Password" required />
-      <div class="hcaptcha" data-sitekey="162a04ac-5e36-478e-a9f6-867c19fe7614"></div>
+      <div class="h-captcha" data-sitekey="162a04ac-5e36-478e-a9f6-867c19fe7614"></div>
       <button type="submit">Signup</button>
     </form>
   </section>
@@ -153,7 +153,7 @@
     <form id="loginForm">
       <input type="email" name="email" placeholder="Email" required />
       <input type="password" name="password" placeholder="Password" required />
-      <div class="hcaptcha" data-sitekey="162a04ac-5e36-478e-a9f6-867c19fe7614"></div>
+      <div class="h-captcha" data-sitekey="162a04ac-5e36-478e-a9f6-867c19fe7614"></div>
       <button type="submit">Login</button>
     </form>
   </section>
@@ -174,17 +174,20 @@
 
   <script>
     const usersDB = JSON.parse(localStorage.getItem("usersDB") || "[]");
+
     function saveUsers() {
       localStorage.setItem("usersDB", JSON.stringify(usersDB));
     }
-    function signup(email, password, captchaResponse) {
+
+    function signup(email, password) {
       const exists = usersDB.find((u) => u.email === email);
       if (exists) return { success: false, message: "User already exists" };
       usersDB.push({ email, password });
       saveUsers();
       return { success: true };
     }
-    function login(email, password, captchaResponse) {
+
+    function login(email, password) {
       const user = usersDB.find((u) => u.email === email && u.password === password);
       if (user) {
         sessionStorage.setItem("currentUser", email);
@@ -203,14 +206,19 @@
           e.preventDefault();
           const email = signupForm.email.value;
           const password = signupForm.password.value;
-          const captchaResponse = grecaptcha.getResponse(); // Get hCaptcha response
+          const captchaResponse = hcaptcha.getResponse();
+
           if (!captchaResponse) {
             alert("Please complete the CAPTCHA.");
             return;
           }
-          const result = signup(email, password, captchaResponse);
+
+          const result = signup(email, password);
           alert(result.success ? "Signup successful!" : result.message);
-          if (result.success) window.location.href = "#login";
+          if (result.success) {
+            hcaptcha.reset();
+            window.location.href = "#login";
+          }
         });
       }
 
@@ -219,14 +227,19 @@
           e.preventDefault();
           const email = loginForm.email.value;
           const password = loginForm.password.value;
-          const captchaResponse = grecaptcha.getResponse(); // Get hCaptcha response
+          const captchaResponse = hcaptcha.getResponse();
+
           if (!captchaResponse) {
             alert("Please complete the CAPTCHA.");
             return;
           }
-          const result = login(email, password, captchaResponse);
+
+          const result = login(email, password);
           alert(result.success ? "Login successful!" : result.message);
-          if (result.success) window.location.href = "#";
+          if (result.success) {
+            hcaptcha.reset();
+            window.location.href = "#";
+          }
         });
       }
 
