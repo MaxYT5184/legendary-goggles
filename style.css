@@ -1,76 +1,92 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to right, #2b5876, #4e4376);
-  color: #fff;
+  background: linear-gradient(to right, #0f0f0f, #1a1a1a);
+  color: white;
+}
+
+.calculator-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.container {
-  display: flex;
-  gap: 20px;
-}
-
-.calculator {
-  background: #222;
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 0 20px #000;
-}
-
-#display {
-  width: 100%;
-  font-size: 2em;
-  padding: 10px;
-  margin-bottom: 10px;
-  text-align: right;
-  background: #111;
-  color: #0f0;
-  border: none;
-  border-radius: 10px;
-}
-
-.buttons {
-  display: grid;
-  grid-template-columns: repeat(4, 60px);
-  gap: 10px;
-}
-
-button {
-  padding: 15px;
-  font-size: 1.2em;
-  border: none;
-  border-radius: 10px;
-  background-color: #333;
-  color: #fff;
-  transition: transform 0.2s, background 0.3s;
-}
-
-button:hover {
-  background-color: #555;
-  transform: scale(1.1);
+  padding: 30px;
 }
 
 .sidebar {
+  width: 200px;
   background: #111;
   padding: 20px;
   border-radius: 15px;
-  min-width: 220px;
+  margin-right: 20px;
   box-shadow: 0 0 20px #000;
 }
 
 .sidebar h2 {
   margin-top: 0;
-  color: #0ff;
 }
 
-.sidebar ul li {
-  background-color: #222;
-  margin: 5px 0;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: #0f0;
+#aiOutput {
+  background: #222;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.calculator {
+  background: #1f1f1f;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 30px #00f;
+}
+
+#display {
+  width: 100%;
+  font-size: 24px;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 60px);
+  grid-gap: 10px;
+}
+
+button {
+  padding: 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background-color: #555;
+}
+
+.graph-section {
+  margin-left: 20px;
+  background: #111;
+  padding: 20px;
+  border-radius: 15px;
+  color: #fff;
+  box-shadow: 0 0 20px #000;
+}
+
+#graphInput {
+  width: 300px;
+  padding: 10px;
+  font-size: 1em;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 10px;
+}
+
+#graphCanvas {
+  background-color: #fff;
+  border: 2px solid #0ff;
+  border-radius: 10px;
 }
