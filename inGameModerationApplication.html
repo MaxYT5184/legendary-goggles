@@ -102,39 +102,51 @@
   <script>
     emailjs.init("uZ-vgu5XC3LWi_jfO"); // Replace with your actual public key
 
-    document.getElementById("moderation-form").addEventListener("submit", function(e) {
-      e.preventDefault();
+document.getElementById("moderation-form").addEventListener("submit", function(e) {
+  e.preventDefault();
 
-      const recaptchaResponse = grecaptcha.getResponse();
-      if (!recaptchaResponse) {
-        alert("Please complete the reCAPTCHA.");
-        return;
-      }
+  const recaptchaResponse = grecaptcha.getResponse();
+  if (!recaptchaResponse) {
+    alert("Please complete the reCAPTCHA.");
+    return;
+  }
 
-      const form = this;
+  const form = this;
 
-      const formData = {
-        user_email: form.user_email.value,
-        full_name: form.full_name.value,
-        age: form.age.value,
-        xbox_name: form.xbox_name.value,
-        discord_username: form.discord_username.value,
-        discord_id: form.discord_id.value,
-        timezone: form.timezone.value,
-        weekly_time: form.weekly_time.value,
-        moderation_experience: form.moderation_experience.value,
-        punishment_history: form.punishment_history.value,
-        perfect_candidate: form.perfect_candidate.value,
-        motivation: form.motivation.value
-      };
+  const formData = {
+    user_email: form.user_email.value,
+    full_name: form.full_name.value,
+    age: form.age.value,
+    xbox_name: form.xbox_name.value,
+    discord_username: form.discord_username.value,
+    discord_id: form.discord_id.value,
+    timezone: form.timezone.value,
+    weekly_time: form.weekly_time.value,
+    moderation_experience: form.moderation_experience.value,
+    punishment_history: form.punishment_history.value,
+    perfect_candidate: form.perfect_candidate.value,
+    motivation: form.motivation.value
+  };
 
-      emailjs.send("service_v26puvh", "template_ypgdwqc", formData)
-        .then(() => {
-          window.location.href = "ModerationApplicationSuccess.html";
-        }, (error) => {
-          alert("Failed to send application: " + error.text);
-        });
+  // Send the application email first
+  emailjs.send("service_v26puvh", "template_ypgdwqc", formData)
+    .then(() => {
+      // After success, send reply email to the user
+      return emailjs.send("service_v26puvh", "template_lpebg25", {
+        to_email: formData.user_email,
+        user_name: formData.full_name,
+        reply_message: "Thank you for your application! We will review it and get back to you soon."
+      });
+    })
+    .then(() => {
+      // After reply email sent, redirect to success page
+      window.location.href = "ModerationApplicationSuccess.html";
+    })
+    .catch((error) => {
+      alert("Failed to send application or reply: " + error.text);
     });
+});
+
   </script>
 
 </body>
