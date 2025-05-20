@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Defenda Minecraft | Videos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      padding: 20px;
+      background-color: #1e1e1e;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 32px;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .video-thumb {
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      border: 2px solid #444;
+      transition: transform 0.3s ease;
+    }
+
+    .video-thumb:hover {
+      transform: scale(1.03);
+    }
+
+    .video-thumb img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Video popup overlay */
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .popup video {
+      max-width: 90%;
+      max-height: 80vh;
+      border: 3px solid #fff;
+      border-radius: 12px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 30px;
+      color: #fff;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background-color: #1e1e1e;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Defenda Minecraft | Videos</h1>
+    <p>Click any video to watch it in fullscreen!</p>
+  </header>
+
+  <section class="video-grid">
+
+    <!-- Example Video Thumbnail -->
+    <div class="video-thumb" onclick="openVideo('videos/video.mp4')">
+      <img src="thumbnails/thumb1.jpg" alt="Video 1">
+    </div>
+
+    <div class="video-thumb" onclick="openVideo('videos/video2.mp4')">
+      <img src="thumbnails/thumb2.jpg" alt="Video 2">
+    </div>
+
+    <!-- Add more as needed -->
+    
+  </section>
+
+  <!-- Video Popup -->
+  <div class="popup" id="videoPopup">
+    <span class="close-btn" onclick="closeVideo()">✖</span>
+    <video id="popupVideo" controls></video>
+  </div>
+
+  <footer>
+    &copy; 2025 Defenda Minecraft. All rights reserved.
+  </footer>
+
+  <script>
+    function openVideo(src) {
+      const popup = document.getElementById('videoPopup');
+      const video = document.getElementById('popupVideo');
+      video.src = src;
+      popup.style.display = 'flex';
+      video.play();
+    }
+
+    function closeVideo() {
+      const popup = document.getElementById('videoPopup');
+      const video = document.getElementById('popupVideo');
+      video.pause();
+      video.currentTime = 0;
+      popup.style.display = 'none';
+    }
+
+    // Close popup if clicking outside video
+    window.addEventListener('click', function(e) {
+      const popup = document.getElementById('videoPopup');
+      const video = document.getElementById('popupVideo');
+      if (e.target === popup) {
+        closeVideo();
+      }
+    });
+  </script>
+
+</body>
+</html>
