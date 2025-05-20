@@ -150,9 +150,9 @@
     <li><a href="#help">How to Join</a></li>
     <li><a href="contact.html">Contact</a></li>
     <li><a href="videos.html">Videos</a></li>
-    <li>
-      <a href="#">Player ▾</a>
-      <ul>
+    <li class="dropdown">
+      <a href="#" id="playerToggle">Player ▾</a>
+      <ul class="dropdown-menu" id="playerMenu">
         <li><a href="serverBanAppeal.html">Appeal</a></li>
         <li><a href="imGameModerationApplication.html">Apply</a></li>
       </ul>
@@ -212,6 +212,23 @@
   <footer>
     <p>© 2025 Defenda Minecraft | <a href="mailto:a.tormen2012@gmail.com">Contact Admin</a></p>
   </footer>
+    
+<script>
+  const toggle = document.getElementById('playerToggle');
+  const menu = document.getElementById('playerMenu');
 
+  toggle.addEventListener('click', function (e) {
+    e.preventDefault();
+    menu.classList.toggle('show');
+  });
+
+  // Optional: Close the menu if you click outside
+  document.addEventListener('click', function (e) {
+    if (!toggle.contains(e.target) && !menu.contains(e.target)) {
+      menu.classList.remove('show');
+    }
+  });
+</script>
+    
 </body>
 </html>
