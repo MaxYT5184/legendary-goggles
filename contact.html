@@ -1,0 +1,149 @@
+<!-- contact.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Defenda Minecraft | Contact Us</title>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f5f9;
+      margin: 0;
+      padding: 40px;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    form {
+      max-width: 600px;
+      background: #fff;
+      padding: 30px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    button {
+      background: #3498db;
+      color: white;
+      padding: 12px 25px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background: #2980b9;
+    }
+
+    .g-recaptcha {
+      margin-top: 20px;
+    }
+
+    .status {
+      margin-top: 15px;
+      font-weight: bold;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Contact Defenda Minecraft Support</h1>
+
+  <form id="contact-form">
+    <label for="name">Your Full Name</label>
+    <input type="text" id="name" name="name" required />
+
+    <label for="discordUsername">Discord Username</label>
+    <input type="text" id="discordUsername" name="discordUsername" required />
+
+    <label for="discordId">Discord ID</label>
+    <input type="text" id="discordId" name="discordId" required />
+
+    <label for="email">Your Email</label>
+    <input type="email" id="email" name="email" required />
+
+    <label for="device">Device You’re Using</label>
+    <select id="device" name="device" required>
+      <option value="">--Select Device--</option>
+      <option>Laptop</option>
+      <option>Mobile</option>
+      <option>Tablet</option>
+    </select>
+
+    <label for="message">Your Message</label>
+    <textarea id="message" name="message" rows="6" required></textarea>
+
+    <div class="g-recaptcha" data-sitekey="6LcF10ErAAAAAO50CB32HcTyDnCeWFGrzGIRXyWW"></div>
+
+    <button type="submit">Send Message</button>
+    <div class="status" id="status"></div>
+  </form>
+
+  <script>
+    emailjs.init("4tQ-6S7AIb3ZjMgps");
+
+    const form = document.getElementById("contact-form");
+    const status = document.getElementById("status");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const recaptcha = grecaptcha.getResponse();
+      if (!recaptcha) {
+        status.textContent = "Please verify you are not a robot.";
+        status.style.color = "red";
+        return;
+      }
+
+      status.textContent = "Sending...";
+
+      emailjs.send("service_5onqkxe", "template_kfa12pt", {
+        name: form.name.value,
+        discord_username: form.discordUsername.value,
+        discord_id: form.discordId.value,
+        email: form.email.value,
+        device: form.device.value,
+        message: form.message.value,
+        "g-recaptcha-response": recaptcha
+      })
+      .then(() => {
+        status.textContent = "Message sent successfully!";
+        status.style.color = "green";
+        form.reset();
+        grecaptcha.reset();
+      }, (error) => {
+        status.textContent = "Failed to send message.";
+        status.style.color = "red";
+        console.error("EmailJS error:", error);
+      });
+    });
+  </script>
+
+</body>
+</html>
