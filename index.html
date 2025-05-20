@@ -110,16 +110,13 @@
 <body>
   <header>
     <h2>Defenda Minecraft</h2>
-    <p>CHECK OUT BLAIR CHANNEL! www.youtube.com/@Blairbearcountry2</p>
-    <p1>Made By Andy aka Max</p1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="#help">How to Join</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="#auth" id="auth-link">Login</a></li>
-      </ul>
-    </nav>
+<nav>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="#help">How to Join</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
   </header>
 
   <section class="hero">
@@ -165,101 +162,14 @@
       <div class="feature">
         <h3>Bedrock Edition</h3>
         <p>Go to Servers → Add Server and use:</p>
-        <strong>Server Address:</strong> bedrock.defendaminecraft.online<br/>
+        <strong>Server Address:</strong> play.defendaminecraft.online<br/>
         <strong>Port:</strong> 19132
       </div>
     </div>
-  </section>
-
-  <section id="contact" class="features">
-    <h2>Contact Us</h2>
-    <form id="contactForm">
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="email" placeholder="Your Email" required />
-      <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-      <button type="submit">Send</button>
-    </form>
-  </section>
-
-  <section id="auth" class="features">
-    <h2>Authentication</h2>
-    <div id="auth-status" class="auth-status"></div>
-    <div class="auth-form">
-      <h3>Sign Up</h3>
-      <form id="signup-form">
-        <input type="email" id="signup-email" placeholder="Email" required />
-        <input type="password" id="signup-password" placeholder="Password" required />
-        <button type="submit">Sign Up</button>
-      </form>
-      <h3>Log In</h3>
-      <form id="login-form">
-        <input type="email" id="login-email" placeholder="Email" required />
-        <input type="password" id="login-password" placeholder="Password" required />
-        <button type="submit">Log In</button>
-      </form>
-    </div>
-  </section>
 
   <footer>
     <p>© 2025 Defenda Minecraft | <a href="mailto:a.tormen2012@gmail.com">Contact Admin</a></p>
   </footer>
 
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyAjC7P6F_ESGdGVBh-UBYFeAWHkBd0R_ec",
-      authDomain: "discord-max-afc9a.firebaseapp.com",
-      projectId: "discord-max-afc9a",
-      storageBucket: "discord-max-afc9a.firebasestorage.app",
-      messagingSenderId: "113825260276",
-      appId: "1:113825260276:web:173373b319827e3602b4a1",
-    };
-
-    const app = firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-
-    const authLink = document.getElementById("auth-link");
-    const authStatus = document.getElementById("auth-status");
-
-    const signupForm = document.getElementById("signup-form");
-    const loginForm = document.getElementById("login-form");
-
-    signupForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const email = document.getElementById("signup-email").value;
-      const password = document.getElementById("signup-password").value;
-      try {
-        await auth.createUserWithEmailAndPassword(email, password);
-        authStatus.textContent = "Sign up successful!";
-      } catch (error) {
-        authStatus.textContent = error.message;
-      }
-    });
-
-    loginForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const email = document.getElementById("login-email").value;
-      const password = document.getElementById("login-password").value;
-      try {
-        await auth.signInWithEmailAndPassword(email, password);
-        authStatus.textContent = "Log in successful!";
-      } catch (error) {
-        authStatus.textContent = error.message;
-      }
-    });
-
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        authStatus.textContent = `Welcome, ${user.email}`;
-        authLink.textContent = "Log Out";
-        authLink.onclick = async () => {
-          await auth.signOut();
-          authStatus.textContent = "";
-          authLink.textContent = "Login";
-        };
-      } else {
-        authLink.textContent = "Login";
-      }
-    });
-  </script>
 </body>
 </html>
