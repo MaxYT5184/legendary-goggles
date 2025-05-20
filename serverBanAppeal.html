@@ -68,7 +68,7 @@
 </form>
 
 <script>
-   emailjs.init("4tQ-6S7AIb3ZjMgps"); // Replace with your EmailJS Public Key
+   emailjs.init("hd8S9bU0sbH_YUHr9"); // Replace with your EmailJS Public Key
 
   document.getElementById("appeal-form").addEventListener("submit", function(e) {
     e.preventDefault();
@@ -97,7 +97,7 @@
         "proof_file_filename": fileInput.files[0].name
       };
 
-      emailjs.send("service_5onqkxe", "template_sxg7hby", formData)
+      emailjs.send("service_fz6fy1i", "template_sxg7hby", formData)
         .then(() => {
           // Redirect after successful submission
           window.location.href = "BanAppealSuccess.html";
