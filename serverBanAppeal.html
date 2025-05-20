@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Server Ban Appeal</title>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      padding: 20px;
+    }
+    form {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 12px;
+      border: none;
+      width: 100%;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+<h2 style="text-align:center;">Server Ban Appeal Form</h2>
+
+<form id="appeal-form">
+  <label>Email Address (Required)</label>
+  <input type="email" name="user_email" required>
+
+  <label>Xbox Live Name (Required)</label>
+  <input type="text" name="xbox_name" required>
+
+  <label>Why were you banned? (Required)</label>
+  <textarea name="ban_reason" required></textarea>
+
+  <label>Why should you be unbanned? (Required)</label>
+  <textarea name="unban_reason" required></textarea>
+
+  <label>Your Name (Required)</label>
+  <input type="text" name="real_name" required>
+
+  <label>Proof Attachments (Required)</label>
+  <input type="file" name="proof_file" required>
+
+  <!-- Google reCAPTCHA -->
+  <div class="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_SITE_KEY"></div>
+
+  <button type="submit">Submit Appeal</button>
+</form>
+
+<script>
+  emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS Public Key
+
+  document.getElementById("appeal-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const recaptchaResponse = grecaptcha.getResponse();
+    if (!recaptchaResponse) {
+      alert("Please complete the reCAPTCHA.");
+      return;
+    }
+
+    const form = this;
+    const fileInput = form.querySelector('input[name="proof_file"]');
+
+    // Read the file as Base64
+    const reader = new FileReader();
+    reader.onload = function() {
+      const base64File = reader.result.split(',')[1]; // strip base64 header
+
+      const formData = {
+        user_email: form.user_email.value,
+        xbox_name: form.xbox_name.value,
+        ban_reason: form.ban_reason.value,
+        unban_reason: form.unban_reason.value,
+        real_name: form.real_name.value,
+        "proof_file": base64File,
+        "proof_file_filename": fileInput.files[0].name
+      };
+
+      emailjs.send("YOUR_SERVICE_ID", "template_sxg7hby", formData)
+        .then(() => {
+          alert("Appeal submitted successfully!");
+          form.reset();
+          grecaptcha.reset();
+        }, (error) => {
+          alert("Failed to send appeal: " + error.text);
+        });
+    };
+
+    reader.readAsDataURL(fileInput.files[0]);
+  });
+</script>
+
+</body>
+</html>
