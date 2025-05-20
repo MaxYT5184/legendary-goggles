@@ -100,7 +100,7 @@
   </form>
 
   <script>
-    emailjs.init(""); // Replace with your actual public key
+    emailjs.init("uZ-vgu5XC3LWi_jfO"); // Replace with your actual public key
 
     document.getElementById("moderation-form").addEventListener("submit", function(e) {
       e.preventDefault();
@@ -128,7 +128,7 @@
         motivation: form.motivation.value
       };
 
-      emailjs.send("", "", formData)
+      emailjs.send("service_v26puvh", "template_ypgdwqc", formData)
         .then(() => {
           window.location.href = "ModerationApplicationSuccess.html";
         }, (error) => {
