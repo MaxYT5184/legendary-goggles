@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rules</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #000;
+      color: #00e676;
+      overflow-x: hidden;
+      opacity: 0;
+      animation: fadeIn 2s forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeOut {
+      to { opacity: 0; }
+    }
+
+    video#bgVideo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      filter: brightness(0.15) blur(1px);
+    }
+
+    audio {
+      display: none;
+    }
+
+    .container {
+      padding: 40px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h1.glow {
+      text-align: center;
+      font-size: 3em;
+      color: #00e676;
+      text-shadow: 0 0 10px #00e676, 0 0 20px #00ff88, 0 0 30px #00ff88;
+      animation: pulse 3s infinite alternate;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #ccc;
+      font-style: italic;
+      margin-top: -10px;
+      margin-bottom: 30px;
+    }
+
+    .rules-list {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      gap: 20px;
+    }
+
+    .rules-list li {
+      background-color: rgba(26, 26, 26, 0.9);
+      padding: 15px 20px;
+      border-left: 5px solid #00e676;
+      box-shadow: 0 0 10px rgba(0, 255, 100, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .rules-list li:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 20px rgba(0, 255, 100, 0.4);
+    }
+
+    .rule-number {
+      font-weight: bold;
+      color: #fff;
+      background: #00e676;
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-right: 10px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #666;
+      font-size: 0.9em;
+    }
+
+    @keyframes pulse {
+      0% { text-shadow: 0 0 10px #00e676, 0 0 20px #00ff88; }
+      100% { text-shadow: 0 0 20px #00ff88, 0 0 40px #00ff88; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🔊 Music that plays on load -->
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/audio/2023/03/29/audio_5e2adac24a.mp3" type="audio/mpeg">
+    Your browser does not support the audio tag.
+  </audio>
+
+  <!-- 🎥 Animated background video -->
+  <video autoplay muted loop id="bgVideo">
+    <source src="https://cdn.coverr.co/videos/coverr-cloudy-mountain-landscape-4270/1080p.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="container">
+    <h1 class="glow">⚔️ Defenda Minecraft Protocol ⚔️</h1>
+    <p class="subtitle">These rules are your lifeline. Break them, and face the void.</p>
+
+    <ul class="rules-list">
+      <li><span class="rule-number">1</span> Raiding and stealing are allowed. Guard your loot.</li>
+      <li><span class="rule-number">2</span> PvP is always on. Trust no one.</li>
+      <li><span class="rule-number">3</span> Griefing is legal. Base defenses matter.</li>
+      <li><span class="rule-number">4</span> Cheating/hacking (x-ray, kill aura, etc) = <strong style="color:red;">perm ban</strong>.</li>
+      <li><span class="rule-number">5</span> Bug exploits = <strong style="color:red;">instant ban</strong>. Report them.</li>
+      <li><span class="rule-number">6</span> Trash talk is okay. Racism, hate speech = <strong style="color:orange;">mute or ban</strong>.</li>
+      <li><span class="rule-number">7</span> No alt accounts for farming or bans. <strong>IP ban</strong> applies.</li>
+      <li><span class="rule-number">8</span> Disobeying staff = <strong>kick, mute, or ban</strong>.</li>
+      <li><span class="rule-number">9</span> No IRL money trading. This is a game, not a market.</li>
+      <li><span class="rule-number">10</span> Approved mods only: OptiFine, Sodium, MiniMap (no radar).</li>
+      <li><span class="rule-number">11</span> Inactive 14+ days? Your base is up for grabs.</li>
+      <li><span class="rule-number">12</span> Appeals must go through the official site. Don’t DM staff.</li>
+    </ul>
+
+    <footer>
+      <p class="footer-text">© 2025 Defenda Minecraft | Every heart has a price...</p>
+    </footer>
+  </div>
+
+  <script>
+    // Smooth fade-out on link clicks
+    document.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', e => {
+        const href = link.getAttribute('href');
+        if (href && !href.startsWith('#')) {
+          e.preventDefault();
+          document.body.style.animation = 'fadeOut 1s forwards';
+          setTimeout(() => window.location = href, 1000);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
