@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Assistant</title>
+  <style>
+    body {
+      background: #111;
+      color: #0f0;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      text-shadow: 0 0 10px #0f0;
+    }
+
+    .chat-box {
+      width: 90%;
+      max-width: 600px;
+      background: #222;
+      border: 1px solid #0f0;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #0f0;
+    }
+
+    .chat-log {
+      height: 200px;
+      overflow-y: auto;
+      background: #111;
+      border: 1px solid #333;
+      padding: 10px;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .chat-log p {
+      margin: 0;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      background: #000;
+      color: #0f0;
+      border: 1px solid #0f0;
+      border-radius: 5px;
+    }
+
+    input:focus {
+      outline: none;
+      box-shadow: 0 0 5px #0f0;
+    }
+
+    footer {
+      margin-top: 30px;
+      font-size: 0.8em;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧠 Defenda Minecraft AI Helper</h1>
+  <div class="chat-box">
+    <div class="chat-log" id="chat-log">
+      <p><strong>Helper AI:</strong> Hello! Ask me anything about the site (like "Where are the rules?" or "How do I play?").</p>
+    </div>
+    <input type="text" id="user-input" placeholder="Ask the AI something..." autofocus />
+  </div>
+  <footer>Defenda Minecraft © 2025</footer>
+
+  <script>
+    const log = document.getElementById('chat-log');
+    const input = document.getElementById('user-input');
+
+    const responses = [
+      {
+        keywords: ['rules', 'rules page'],
+        response: "The rules page is at rules.html. Redirecting you there...",
+        redirect: "rules.html"
+      },
+      {
+        keywords: ['play', 'join', 'server', 'how to play'],
+        response: "To play, go to play.html. Redirecting you now...",
+        redirect: "index.html"
+      },
+      {
+        keywords: ['shop', 'buy', 'perks'],
+        response: "You can buy perks in the shop.html. Heading there now...",
+        redirect: "shop.html"
+      },
+      {
+        keywords: ['help', 'ai', 'assistant'],
+        response: "I'm your AI helper. Ask me about any page and I’ll guide you!"
+      },
+      {
+        keywords: ['home', 'main page'],
+        response: "Home Page Ok!",
+        redirect: "index.html"
+      }
+    ];
+
+    function respond(userInput) {
+      const lowerInput = userInput.toLowerCase();
+      let matched = false;
+
+      for (let r of responses) {
+        if (r.keywords.some(k => lowerInput.includes(k))) {
+          log.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
+          log.innerHTML += `<p><strong>Helper AI:</strong> ${r.response}</p>`;
+          log.scrollTop = log.scrollHeight;
+          if (r.redirect) {
+            setTimeout(() => window.location.href = r.redirect, 2000);
+          }
+          matched = true;
+          break;
+        }
+      }
+
+      if (!matched) {
+        log.innerHTML += `<p><strong>You:</strong> ${userInput}</p>`;
+        log.innerHTML += `<p><strong>Helper AI:</strong> I'm not sure about that. Try asking about rules, shop, or how to play.</p>`;
+        log.scrollTop = log.scrollHeight;
+      }
+    }
+
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && input.value.trim()) {
+        respond(input.value.trim());
+        input.value = '';
+      }
+    });
+  </script>
+</body>
+</html>
