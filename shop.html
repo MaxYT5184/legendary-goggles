@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Server Shop</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #0a0a0a, #1a1a1a);
+      color: #00e676;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem;
+      background-color: #111;
+      color: #00e676;
+    }
+
+    .shop-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    .rank-card {
+      background: #1b1b1b;
+      border: 2px solid #00e676;
+      padding: 1.5rem;
+      border-radius: 12px;
+      width: 280px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .rank-card:hover {
+      transform: scale(1.05);
+    }
+
+    .rank-card h2 {
+      margin: 0 0 1rem;
+    }
+
+    .rank-perks {
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    .rank-perks ul {
+      padding: 0;
+      list-style: none;
+    }
+
+    .rank-perks li {
+      margin: 0.5rem 0;
+    }
+
+    input[type="text"] {
+      width: 90%;
+      padding: 8px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .btn {
+      background-color: #00e676;
+      color: #000;
+      padding: 10px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      margin: 0 5px;
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    .btn:hover {
+      background-color: #00c95f;
+    }
+
+    .note {
+      text-align: center;
+      color: #ccc;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #111;
+      margin-top: 2rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🎉 Welcome to the Rank Shop</h1>
+    <p>Enter your Minecraft username & use discount code <strong>CHILL5</strong> for 5% off!</p>
+  </header>
+
+  <div class="shop-container">
+    <!-- Repeat this card per rank -->
+    <div class="rank-card">
+      <h2>Hero Rank</h2>
+      <div class="rank-perks">
+        <ul>
+          <li>✅ Green name in chat</li>
+          <li>✅ Access to /hat</li>
+          <li>✅ 500 claim blocks</li>
+          <li>✅ /home x2</li>
+          <li>💲 <strong>$1.99</strong></li>
+        </ul>
+      </div>
+      <input type="text" placeholder="Enter Minecraft username" required />
+      <a class="btn" href="https://defendaminecraft.craftingstore.net/package/HERO_ID?coupon=CHILL5" target="_blank">Buy</a>
+      <a class="btn" href="https://defendaminecraft.craftingstore.net/package/HERO_ID?coupon=CHILL5" target="_blank">Gift</a>
+    </div>
+
+    <div class="rank-card">
+      <h2>Knight Rank</h2>
+      <div class="rank-perks">
+        <ul>
+          <li>✅ All Hero perks</li>
+          <li>✅ /feed</li>
+          <li>✅ 800 claim blocks</li>
+          <li>✅ /home x3</li>
+          <li>💲 <strong>$3.99</strong></li>
+        </ul>
+      </div>
+      <input type="text" placeholder="Enter Minecraft username" required />
+      <a class="btn" href="https://defendaminecraft.craftingstore.net/package/KNIGHT_ID?coupon=CHILL5" target="_blank">Buy</a>
+      <a class="btn" href="https://defendaminecraft.craftingstore.net/package/KNIGHT_ID?coupon=CHILL5" target="_blank">Gift</a>
+    </div>
+
+    <div class="rank-card">
+      <h2>Titan Rank</h2>
+      <div class="rank-perks">
+        <ul>
+          <li>✅ All Knight perks</li>
+          <li>✅ /fly</li>
+          <li>✅ 1,200 claim blocks</li>
+          <li>✅ /home x5</li>
+          <li>💲 <strong>$5.99</strong></li>
+        </ul>
+      </div>
+      <input type="text" placeholder="Enter Minecraft username" required />
+      <a class="btn" href="https://defendaminecraft.craftingstore.net/package/TITAN_ID?coupon=CHILL5" target="_blank">Buy</a>
+      <a class="btn" href="https://defendaminecraft.craftingstore.net/package/TITAN_ID?coupon=CHILL5" target="_blank">Gift</a>
+    </div>
+
+    <div class="rank-card">
+      <h2>Phantom Rank</h2>
+      <div class="rank-perks">
+        <ul>
+          <li>✅ All Titan perks</li>
+          <li>✅ /enderchest</li>
+          <li>✅ 1,800 claim blocks</li>
+          <li>✅ /home x7</li>
+          <li>💲 <strong>$7.99</strong></li>
+        </ul>
+      </div>
+      <input type="text" placeholder="Enter Minecraft username" required />
+      <a class="btn" href="https://defendaminecraft.craftingstore.net/package/PHANTOM_ID?coupon=CHILL5" target="_blank">Buy</a>
+      <a class="btn" href="https://defendaminecraft.craftingstore.net/package/PHANTOM_ID?coupon=CHILL5" target="_blank">Gift</a>
+    </div>
+
+    <div class="rank-card">
+      <h2>Shadowlord Rank</h2>
+      <div class="rank-perks">
+        <ul>
+          <li>✅ All Phantom perks</li>
+          <li>✅ Custom Particle Trails</li>
+          <li>✅ 2,500 claim blocks</li>
+          <li>✅ /home x10</li>
+          <li>💲 <strong>$9.99</strong></li>
+        </ul>
+      </div>
+      <input type="text" placeholder="Enter Minecraft username" required />
+      <a class="btn" href="https://defendaminecraft.craftingstore.net/package/SHADOWLORD_ID?coupon=CHILL5" target="_blank">Buy</a>
+      <a class="btn" href="https://defendaminecraft.craftingstore.net/package/SHADOWLORD_ID?coupon=CHILL5" target="_blank">Gift</a>
+    </div>
+  </div>
+
+  <div class="note">
+    🚨 Don't forget to enter your Minecraft username correctly before buying or gifting!
+  </div>
+
+  <footer>
+    &copy; 2025 Defenda Minecraft Shop | All rights reserved.
+  </footer>
+</body>
+</html>
