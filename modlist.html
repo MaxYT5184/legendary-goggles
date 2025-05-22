@@ -3,8 +3,139 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Defenda Minecraft MODS List</title>
-  <link rel="stylesheet" href="style.css"> <!-- Link to your CSS file -->
+  <title>Defenda Minecraft | Mods List</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #f0f0f0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: #1f1f1f;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      animation: slideDown 1s ease-out;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    main {
+      flex: 1;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .mod-entry {
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 25px;
+      max-width: 700px;
+      width: 100%;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      animation: fadeIn 1.5s ease;
+      transition: transform 0.3s ease;
+    }
+
+    .mod-entry:hover {
+      transform: scale(1.02);
+    }
+
+    .mod-title {
+      font-size: 2rem;
+      color: #4fd1c5;
+      margin-bottom: 10px;
+      animation: popIn 0.6s ease;
+    }
+
+    .mod-description {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      animation: fadeIn 2s ease;
+    }
+
+    .mod-info h3 {
+      color: #00c6ff;
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    .mod-details {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .mod-details li {
+      margin-bottom: 8px;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: background 0.3s ease;
+    }
+
+    .mod-details li:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    footer {
+      background: #111;
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9rem;
+      color: #aaa;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Animations */
+    @keyframes slideDown {
+      from {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes popIn {
+      from {
+        transform: scale(0.9);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
