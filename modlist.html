@@ -1,38 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Defenda Minecraft | Mods List</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Defenda Minecraft MODS List</title>
   <style>
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     }
 
     body {
-      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-      color: #f0f0f0;
+      overflow: hidden;
+      color: white;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Super animated background */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, #0f0c29, #302b63, #24243e);
+      background-size: 400% 400%;
+      animation: backgroundAnim 20s infinite linear;
+      z-index: -1;
+    }
+
+    @keyframes backgroundAnim {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     header {
-      background: #1f1f1f;
-      padding: 30px 20px;
       text-align: center;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-      animation: slideDown 1s ease-out;
+      padding: 40px 20px;
+      animation: slideFade 2s ease-out;
     }
 
     header h1 {
-      font-size: 2.5rem;
-      background: linear-gradient(to right, #00c6ff, #0072ff);
+      font-size: 3rem;
+      background: linear-gradient(to right, #00ffe7, #007bff, #00ffe7);
+      background-size: 200% auto;
+      color: transparent;
+      background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      animation: glowText 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes glowText {
+      from { text-shadow: 0 0 10px #00ffe7, 0 0 20px #007bff; }
+      to { text-shadow: 0 0 30px #00ffe7, 0 0 60px #007bff; }
     }
 
     main {
@@ -40,42 +69,46 @@
       padding: 40px 20px;
       display: flex;
       justify-content: center;
+      align-items: center;
     }
 
     .mod-entry {
-      background: rgba(255, 255, 255, 0.05);
-      border: 2px solid rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      padding: 25px;
-      max-width: 700px;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      padding: 30px;
       width: 100%;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      animation: fadeIn 1.5s ease;
-      transition: transform 0.3s ease;
+      max-width: 800px;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+      border: 2px solid rgba(0, 255, 255, 0.2);
+      animation: popIn 1.5s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .mod-entry:hover {
       transform: scale(1.02);
+      box-shadow: 0 0 50px rgba(0, 255, 255, 0.6);
     }
 
     .mod-title {
-      font-size: 2rem;
-      color: #4fd1c5;
-      margin-bottom: 10px;
-      animation: popIn 0.6s ease;
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      color: #00ffe7;
+      animation: pulseText 2s infinite;
     }
 
     .mod-description {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
+      margin-bottom: 25px;
       line-height: 1.6;
-      margin-bottom: 20px;
       animation: fadeIn 2s ease;
     }
 
     .mod-info h3 {
-      color: #00c6ff;
-      font-size: 1.3rem;
+      font-size: 1.5rem;
       margin-bottom: 10px;
+      color: #80ffea;
+      text-shadow: 0 0 10px #80ffea;
     }
 
     .mod-details {
@@ -84,54 +117,57 @@
     }
 
     .mod-details li {
-      margin-bottom: 8px;
-      background: rgba(0, 0, 0, 0.2);
-      padding: 8px 12px;
-      border-radius: 8px;
-      transition: background 0.3s ease;
+      background: rgba(0, 255, 255, 0.1);
+      margin-bottom: 10px;
+      padding: 10px 15px;
+      border-left: 5px solid #00ffe7;
+      border-radius: 10px;
+      animation: fadeInUp 1s ease-in-out forwards;
+      opacity: 0;
     }
 
-    .mod-details li:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
+    .mod-details li:nth-child(1) { animation-delay: 0.3s; }
+    .mod-details li:nth-child(2) { animation-delay: 0.6s; }
+    .mod-details li:nth-child(3) { animation-delay: 0.9s; }
+    .mod-details li:nth-child(4) { animation-delay: 1.2s; }
 
     footer {
-      background: #111;
       text-align: center;
-      padding: 15px;
+      padding: 20px;
       font-size: 0.9rem;
-      color: #aaa;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
       border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     /* Animations */
-    @keyframes slideDown {
-      from {
-        transform: translateY(-50px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
+    @keyframes slideFade {
+      0% { transform: translateY(-50px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
     }
 
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
+      0% { opacity: 0; }
+      100% { opacity: 1; }
     }
 
     @keyframes popIn {
-      from {
-        transform: scale(0.9);
+      0% { transform: scale(0.9); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes pulseText {
+      0% { text-shadow: 0 0 10px #00ffe7; }
+      100% { text-shadow: 0 0 30px #00ffe7; }
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        transform: translateY(20px);
         opacity: 0;
       }
-      to {
-        transform: scale(1);
+      100% {
+        transform: translateY(0);
         opacity: 1;
       }
     }
