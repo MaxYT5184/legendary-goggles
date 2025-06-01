@@ -1,1 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Defenda Minecraft</title>
 
+  <!-- Boxicons for futuristic icons -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: radial-gradient(ellipse at bottom, #0d1a2b 0%, #000 100%);
+      color: #e0e0e0;
+      overflow-x: hidden;
+    }
+
+    /* Animated background stars */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: url('https://media.giphy.com/media/XAxylRMCdpbEWUAvr8/giphy.gif') repeat;
+      opacity: 0.15;
+      z-index: -1;
+      animation: moveStars 60s linear infinite;
+    }
+
+    @keyframes moveStars {
+      from { background-position: 0 0; }
+      to { background-position: -10000px 5000px; }
+    }
+
+    header {
+      background-color: rgba(30, 30, 30, 0.9);
+      padding: 1em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: blur(6px);
+    }
+
+    nav {
+      position: relative;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1em;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #00e676;
+      font-weight: bold;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      background-color: #111;
+      border: 1px solid #00e67633;
+      border-radius: 8px;
+      padding: 0.5em;
+      top: 100%;
+      left: 0;
+      min-width: 180px;
+      z-index: 1000;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px #00e67655;
+    }
+
+    .dropdown-menu.show {
+      display: block;
+    }
+
+    .dropdown-menu li a:hover {
+      background-color: #00e67622;
+      border-radius: 6px;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #00e676;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1em;
+      margin: 0;
+      padding: 0;
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        display: none;
+        background-color: #000;
+        width: 100%;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .dropdown-menu {
+        position: static;
+      }
+    }
+
+    .hero {
+      text-align: center;
+      padding: 4em 1em;
+      background-color: rgba(30, 30, 30, 0.9);
+      backdrop-filter: blur(8px);
+      border: 1px solid #00e67622;
+      margin: 2em auto;
+      max-width: 90%;
+      border-radius: 12px;
+    }
+
+    .hero h1 {
+      font-size: 3em;
+      margin-bottom: 0.5em;
+      text-shadow: 0 0 10px #00e67688;
+    }
+
+    .btn {
+      background-color: #00e676;
+      color: #000;
+      padding: 0.8em 1.5em;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 5px;
+      display: inline-block;
+      box-shadow: 0 0 10px #00e676aa;
+    }
+
+    .features {
+      padding: 2em;
+      text-align: center;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2em;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .feature {
+      background-color: rgba(30, 30, 30, 0.8);
+      padding: 1.5em;
+      border-radius: 12px;
+      border: 1px solid #00e67622;
+      box-shadow: 0 0 15px #00e67622;
+    }
+
+    .feature h3 {
+      margin-top: 0;
+    }
+
+    footer {
+      background-color: rgba(30, 30, 30, 0.9);
+      text-align: center;
+      padding: 1em;
+      margin-top: 2em;
+    }
+
+    footer a {
+      color: #00e676;
+      text-decoration: underline;
+    }
+
+    /* AI Chat Assistant Style */
+    #ai-chat {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(30, 30, 30, 0.95);
+      padding: 1em;
+      border-radius: 10px;
+      border: 1px solid #00e67644;
+      box-shadow: 0 0 12px #00e67655;
+      max-width: 250px;
+      z-index: 999;
+      color: #e0e0e0;
+    }
+
+    #ai-chat input {
+      width: 100%;
+      padding: 0.5em;
+      border: none;
+      background-color: #222;
+      color: #00e676;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h2><i class='bx bx-shield-quarter'></i> Defenda Minecraft</h2>
+    <nav>
+      <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+      <ul class="nav-links">
+        <li><a href="#help"><i class='bx bx-help-circle'></i> How to Join</a></li>
+        <li><a href="contact.html"><i class='bx bx-envelope'></i> Contact</a></li>
+        <li><a href="videos.html"><i class='bx bx-video'></i> Videos</a></li>
+        <li><a href="rules.html"><i class='bx bx-book'></i> Rules</a></li>
+        <li class="dropdown">
+          <a href="#" id="playerToggle"><i class='bx bx-user'></i> Player ▾</a>
+          <ul class="dropdown-menu" id="playerMenu">
+            <li><a href="serverBanAppeal.html">Appeal</a></li>
+            <li><a href="inGameModerationApplication.html">Apply</a></li>
+            <li><a href="shop.html">Shop</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Welcome to Defenda Minecraft</h1>
+    <p>Join using <strong>play.defendaminecraft.online</strong></p>
+    <a href="#help" class="btn">How to Join</a>
+  </section>
+
+  <section class="features">
+    <h2>🌟 Why Join Us?</h2>
+    <div class="feature-grid">
+      <div class="feature">
+        <h3>🌐 24/7 Online</h3>
+        <p>Our servers never sleep — play any time, day or night.</p>
+      </div>
+      <div class="feature">
+        <h3>🔥 Custom Plugins</h3>
+        <p>Unique gameplay with custom-coded features and enhancements.</p>
+      </div>
+      <div class="feature">
+        <h3>🛡 Active Moderation</h3>
+        <p>We keep the community fun and safe with real human moderators.</p>
+      </div>
+      <div class="feature">
+        <h3>🎮 Java & Bedrock Support</h3>
+        <p>All players are welcome! Connect from PC, mobile, or console.</p>
+      </div>
+      <div class="feature">
+        <h3>🚀 Fast & Lag-Free</h3>
+        <p>Optimized for high performance and smooth gameplay.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="help" class="features">
+    <h2>🧭 How to Join</h2>
+    <div class="feature-grid">
+      <div class="feature">
+        <h3>Java Edition</h3>
+        <p>Go to Multiplayer, Add Server, and enter:</p>
+        <strong>play.defendaminecraft.online</strong>
+      </div>
+      <div class="feature">
+        <h3>Bedrock Edition</h3>
+        <p>Go to Servers → Add Server:</p>
+        <strong>Address:</strong> play.defendaminecraft.online<br>
+        <strong>Port:</strong> 19132
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Defenda Minecraft | <a href="mailto:a.tormen2012@gmail.com">Contact Admin</a></p>
+  </footer>
+
+  <!-- AI Chat Assistant (Static placeholder) -->
+  <div id="ai-chat">
+    <strong>🤖 AI Assistant</strong><br>
+    <p>Need help? Type your question below:</p>
+    <input type="text" placeholder="Ask something..." />
+  </div>
+
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    const playerToggle = document.getElementById('playerToggle');
+    const playerMenu = document.getElementById('playerMenu');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
+
+    playerToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      playerMenu.classList.toggle('show');
+    });
+  </script>
+</body>
+</html>
